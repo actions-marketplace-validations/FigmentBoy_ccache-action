@@ -59362,7 +59362,7 @@ async function install() {
     if (external_process_namespaceObject.platform === "darwin") {
         await exec.exec("brew install ccache");
     } else if (external_process_namespaceObject.platform === "win32") {
-        await exec.exec(`cmake -P set(ccache_url "https://github.com/cristianadam/ccache/releases/download/v$ENV{CCACHE_VERSION}/${ { runner.os } }.tar.xz") 
+        await exec.exec(`cmake -P set(ccache_url "https://github.com/cristianadam/ccache/releases/download/v$ENV{CCACHE_VERSION}/Windows.tar.xz") 
         file(DOWNLOAD "\${ccache_url}" ./ccache.tar.xz SHOW_PROGRESS)
         execute_process(COMMAND \${CMAKE_COMMAND} -E tar xvf ./ccache.tar.xz)
         `)
