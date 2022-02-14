@@ -9,7 +9,12 @@ import * as cache from "@actions/cache";
 async function install() {
   if (process.platform === "darwin") {
     await exec.exec("brew install ccache");
-  } else {
+  } else if process.platform === "win32" {
+    await exec.exec(`cmake -P set(ccache_url "https://github.com/cristianadam/ccache/releases/download/v$ENV{CCACHE_VERSION}/${ { runner.os } }.tar.xz")
+      file(DOWNLOAD "${ccache_url}" ./ccache.tar.xz SHOW_PROGRESS)
+      execute_process(COMMAND ${CMAKE_COMMAND} -E tar xvf ./ccache.tar.xz)
+      `)
+  } else
     await exec.exec("sudo apt-get install -y ccache");
   }
 }
